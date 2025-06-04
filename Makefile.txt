@@ -1,0 +1,22 @@
+# Define the compiler.
+CC = gcc
+
+# Compilation flags.
+CFLAGS = -Wall -Wextra -pedantic -std=gnu99 -g -I/local/courses/csse2310/include -g
+
+# Default target.
+.DEFAULT_GOAL := uqparallel
+
+.PHONY: clean
+
+# uqparallel.o is the target and uqparallel.c is the dependency.
+uqparallel.o: uqparallel.c
+	$(CC) $(CFLAGS) -c $^ -o $@
+
+# uqparallel is the target and uqparallel.o is the dependency.
+uqparallel: uqparallel.o
+	$(CC) $(CFLAGS) $^ -o $@ -L/local/courses/csse2310/lib -lcsse2310a3
+
+# Clean up build artifacts.
+clean:
+	rm -f uqparallel *.o
